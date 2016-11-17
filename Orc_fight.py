@@ -1,72 +1,65 @@
+#!/usr/bin/env python3
+
+"""
+A description of your program goes here.
+"""
+
 import time
 import random
 
-class Fighter: #Hero's stats
-    Health = 20
-    Attack = 10
-    Defense = 14
+class Character:
+    """
+    A description of this class goes here.
+    """
+    def __init__(self, name, health, attack, defense):
+        self.name = name
+        self.health = health
+        self.attack = attack
+        self.defense = defense
 
-class Orc : #Enemy Orc Stats
-    Health = 30
-    Attack = 12
-    Defense = 8
+    def fight(self, other):
+        while other.health > 0:
+            swings = random.randint(1,10)
+            if swings <=2:
+                print("you missed, he punched you in the face")
+                self.health -= 10
+                other.health += 1
+            elif swings <= 3:
+                print("you hit the {} for 3".format(other.name))
+                other.health -= 3
+            elif swings <=6:
+                print("you hit the {} for 6".format(other.name))
+                other.health -= 6
+            elif swings <= 10:
+                print("CRIT")
+                other.health -= 9
+            time.sleep(2)
 
-class Wolf: #Enemy Wolf Stats
-    Health = 10
-    Attack = 5
-    Defense = 3
-
-Silver_Bag = 0
-
-if Silver_Bag < 2:
-    print("You now have " + str(Silver_Bag) + " piece of silver!")
-else:
-    print("You now have" + str(Silver_Bag) + "pieces of silver")
-
-
-def Orc_fight(): # What happens when you encounter an Orc
-	while Orc.Health >0:
-		swings = random.randint(1,10)
-		if swings <=2:
-			print("you missed, he punched you in the face")
-			Fighter.Health = Fighter.Health - 10
-			Orc.Health = Orc.Health + 1
-			time.sleep(2)
-		if swings <= 3:
-			print("you hit the Orc for 3")
-			Orc.Health = Orc.Health - 3
-			time.sleep(2)
-		if swings <=6:
-			print("you hit the Orc for 6")	
-			Orc.Health = Orc.Health - 6
-			time.sleep(2)
-		if swings <= 10:
-			print("CRIT")
-			Orc.health = Orc.Health - 9
-			time.sleep(2)
-		if Orc.Health <=0:
-			print("you slain the Orc")
-			break
-Introduction = input("You are new here, What's your name?")
-Starts=("Ah, " + Introduction + " That's a good name, I'm Ahab, OH SHIT THATSAORC IMOUT \n\n")
-print(Starts)
-time.sleep(2)
-Orc_fight()
-print("\n")
-print("Damn, good job taking care of that Orc, here's five silver")
-time.sleep(1)
-Silver_Bag +=1
-print("\n")
+        print("you slain the {}".format(other.name))
 
 
+def main():
+    user_name = input("You are new here, What's your name?")
 
+    fighter = Character(user_name, 20, 10, 14) #make an instance of the class to use
+    orc = Character("Orc", 20, 12, 8)
+    wolf = Character("Wolf", 10, 5, 3)
 
+    silver_bag = 0
 
+    starts=("Ah, {}. That's a good name, I'm Ahab, OH SHIT THATSAORC IMOUT \n\n".format(user_name))
+    print(starts)
+    time.sleep(2)
+    fighter.fight(orc)
+    print("\n")
+    print("Damn, good job taking care of that Orc, here's five silver")
+    time.sleep(1)
+    silver_bag += 5
+    print("\n")
+    print("Oh no! Here's the wolf!")
+    fighter.fight(wolf) #see how easily we can reuse a method if it's written correctly
+    print("Damn, good job taking care of that Wolf, here's another five silver")
+    silver_bag += 5
 
-
-        
-
-        
-
-        
-    
+if __name__ == '__main__':
+    main()
