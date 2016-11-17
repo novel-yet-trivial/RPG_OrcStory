@@ -18,6 +18,12 @@ class Wolf: #Enemy Wolf Stats
 
 Silver_Bag = 0
 
+if Silver_Bag < 2:
+    print("You now have " + str(Silver_Bag) + " piece of silver!")
+else:
+    print("You now have" + str(Silver_Bag) + "pieces of silver")
+
+
 def Orc_fight(): # What happens when you encounter an Orc
 	while Orc.Health >0:
 		swings = random.randint(1,10)
@@ -52,11 +58,6 @@ time.sleep(1)
 Silver_Bag +=1
 print("\n")
 
-if Silver_Bag < 2:
-    print("You now have " + str(Silver_Bag) + " piece of silver!")
-else:
-    print("You now have" + str(Silver_Bag) + "pieces of silver")
-    
 
 
 
